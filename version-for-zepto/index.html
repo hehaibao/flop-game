@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<link href="css/style.css" rel="stylesheet">
+<title>翻牌拼手速</title>
+<script src="js/fastclick.js"></script>
+</head>
+<body>
+
+<!--wrapper-->
+<div id="wrapper" class="fw dn">
+	<div id="banner" class="fw pr">
+		<p class="tc rule_box"><a href="javascript:;" class="rules">活动规则 >> </a></p>
+	</div>
+	<div id="btns" class="tc">
+		<a href="javascript:;" class="fl btn btns_lf">
+			<span id="time_desc">记忆时间:</span>
+			<span id="time" class="fr tc">10</span>
+		</a>
+		<a href="javascript:;" id="view_record_btn2" class="btn btns_rt fr pr">
+			<span>查看中奖纪录</span>
+			<span id="dot"></span>
+		</a>
+	</div>
+	<div id="card_box" class="pr">
+		<div id="cards"><p class="tc c-white">暂无数据...</p></div>
+		<!--游戏玩法说明-->
+		<div class="popover_ fw">
+			<div class="modal_">
+				<p class="tc rule_title">游戏玩法说明</p>
+				<div id="rule_desc">
+					<p>1. 在规定时间内，记忆牌面内容及位置；</p>
+					<p>2. 游戏中，点击任意两张牌，若相同则可翻开，规定时间内全部配对成功即过关；</p>
+					<p>3. 顺利过关可以获得一次抽奖机会。</p>
+				</div>
+				<div id="mobile_box" class="tc">
+					<input type="tel" value="" name="mobile" maxlength="11" class="tc" disabled="disabled" placeholder="请输入手机号码" id="mobile_ipt"/>
+				</div>
+				<p class="tc">
+					<a href="javascript:;" class="start"></a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--popover-->
+<div class="popover fw pf dn">
+	<!--活动规则-->
+	<div class="modal m2">
+		<div class="head"></div>
+		<div class="contents"><p class="tc c-white">暂无数据...</p></div>
+		<a href="javascript:;" class="close_btn" id="close_btn5"></a>
+	</div>
+	<!---中奖纪录-->
+	<div class="modal m3">
+		<div class="head"></div>
+		<div class="info tc">
+			<p>请用手机号码<span class="default_mobile">***********</span></p>
+			<p>快捷登录“APP”领取奖品</p>
+		</div>
+		<div class="contents">
+			<ul id="records" class="tc"></ul>
+			<p class="tc"><a href="javascript:;" class="modal_btns br20 dn" id="receive_btn">去领奖</a></p>
+		</div>
+		<a href="javascript:;" class="close_btn"></a>
+	</div>
+	<!---恭喜过关-->
+	<div class="modal m4">
+		<div class="head"></div>
+		<div class="contents tc">
+			<p class="modal_tips">恭喜您，获得了一次抽奖机会</p>
+			<p><a href="javascript:;" class="modal_btns active" id="lottery_btn">赶快去抽奖</a></p>
+		</div>
+	</div>
+	<!---谢谢参与-->
+	<div class="modal m5">
+		<div class="head"></div>
+		<div class="contents tc">
+			<p class="modal_tips dn">手速不够快，再来一次！</p>
+			<p class="modal_tips dn">太遗憾了，奖品与你擦肩而过</p>
+			<p class="fw oh">
+				<a href="javascript:;" class="modal_btns fl ls8" id="close_btn2">关闭</a>
+				<a href="javascript:;" class="modal_btns fr" id="again_btn">再玩一次</a>
+			</p>
+		</div>
+	</div>
+	<!---活动已结束-->
+	<div class="modal m6">
+		<div class="head"></div>
+		<div class="contents tc">
+			<p class="modal_tips">真遗憾，本次活动已经结束啦，下回趁早哦！</p>
+			<p><a href="javascript:;" class="modal_btns br20" id="konw_btn">知道了</a></p>
+		</div>
+		<a href="javascript:;" class="close_btn"></a>
+	</div>
+	<!---恭喜中奖-->
+	<div class="modal m7">
+		<div class="head"></div>
+		<div class="contents">
+			<p class="modal_tips tc">恭喜您获得了：<span id="lottery_name">***</span>哦～</p>
+			<p class="fw oh">
+				<a href="javascript:;" class="modal_btns fl" id="view_record_btn">查看奖品</a>
+				<a href="javascript:;" class="modal_btns fr" id="come_again_btn">再玩一次</a>
+			</p>
+		</div>
+		<a href="javascript:;" class="close_btn"></a>
+	</div>
+	<!--再玩一次-->
+	<div class="modal m8">
+		<div class="head"></div>
+		<div class="contents">
+			<p class="modal_tips tc">再玩一次，大奖等着你~</p>
+			<p class="fw oh">
+				<a href="javascript:;" class="modal_btns fl ls8" id="close_btn4">关闭</a>
+				<a href="javascript:;" class="modal_btns fr" id="come_again_btn2">再玩一次</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+<!--js-->
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/matchGame.js"></script>
+</body>
+</html>
