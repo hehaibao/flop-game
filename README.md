@@ -4,6 +4,12 @@
 
 该版本目前只有zepto版本，后续有时间会考虑增加其他版本，比如：Vue；
 
-效果预览（请用手机模式哦）：
+在线演示（请用手机模式哦）：
 
 https://hehaibao.github.io/flop-game/version-for-zepto/index.html
+
+zepto版 二维码：
+
+![image](https://github.com/hehaibao/flop-game/blob/master/qrcode-for-zepto.png)
+
+
