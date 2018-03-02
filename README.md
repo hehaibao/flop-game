@@ -1,6 +1,6 @@
 # h5小游戏，翻牌拼手速
 
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/hehaibao/flop-game)
+[![Github All Releases](https://img.shields.io/github/downloads/flop-game/flop-game/total.svg)](https://github.com/hehaibao/flop-game)
 
 此项目是2016年前做的demo，适用于移动端活动，跟后端交互的逻辑和JSSDK分享逻辑已经去掉。
 
