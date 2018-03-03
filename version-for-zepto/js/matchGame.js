@@ -26,12 +26,12 @@ var time,
     $dot = $('#dot'),
     $lottery_btn = $('#lottery_btn'),
     dumpBase = {
-        isEnd: 1
+        isEnd: null
     };
 
 //记忆时间 开始游戏
-function start_game(isEnd) {
-    if(isEnd == 1) {
+function start_game() {
+    if(dumpBase.isEnd == 2) {
         showToast('准备开始记忆啦~', 2000);
         close_popover();
         $popover_.hide();
@@ -44,8 +44,9 @@ function start_game(isEnd) {
                 countdown(this, time, wait, isLock);
             }, 2500);
         }
-    }else{
-        gameover(6, isEnd);return;
+    } else {
+        showModal(6);
+        return;
     }
 }
 
@@ -118,18 +119,18 @@ function init() {
     tpl = '',
     cardWidth = 80, //牌宽
     cardHeight = 80, //牌高
-    de = new Date(),
-    now = getFormatDate(de), //当前日期
-    end = getFormatDate('2088-12-30'); //活动结束日期，具体根据接口返回值来
+    currentDate = new Date(),
+    now = getFormatDate(currentDate), //当前日期
+    end = getFormatDate('2048-10-24'); //活动结束日期，具体根据接口返回值来
 
-    dumpBase.isEnd = time_contrast(now,end); //日期对比，判断活动是否已结束
+    dumpBase.isEnd = timeContrast(now, end); //日期对比，判断活动是否已结束
 
     //判断活动是否结束
-    if(dumpBase.isEnd == 2) {
-        $('.modal.m3').find('.close_btn').removeAttr('id');
-        start_game(dumpBase.isEnd);
-    }else{
-        $('.modal.m3').find('.close_btn').attr('id','close_btn3');
+    if(dumpBase.isEnd == 1) {
+        showModal(6);
+        $start.removeClass('active');
+    } else {
+        $start.addClass('active'); //启用开始按钮
     }
     
     time = 10; //记忆时间
@@ -166,7 +167,7 @@ function init() {
                             setTimeout(function() {
                                 cardLen = cardLen - 2;
                                 if(cardLen == 0) {
-                                    gameover(4,dumpBase.isEnd);
+                                    gameover(4);
                                 }
                             }, 100);
                         } else { //不一致
@@ -179,7 +180,6 @@ function init() {
             showToast('游戏还未开始！');
         }
     });
-    $start.addClass('active'); //启用开始按钮
     $('#mobile_ipt').val(sessionStorage.getItem('CARD_MOBILE')).removeAttr('disabled'); //启用输入框并填充手机号
     init_status();
 }
@@ -191,14 +191,14 @@ function init_status() {
 }
 
 //游戏结束
-function gameover(a, isEnd) {
+function gameover(a) {
     clearTimeout(timer2);
     $time_desc.text('记忆时间:');
     $time.text(time);
     $('.modal.m3').find('.close_btn').removeAttr('id');
     init_status();
     showModal(a);
-    if(isEnd == 1) {
+    if(dumpBase.isEnd == 1) {
         init();
     }
     dumpBase.isEnd = 1;
@@ -245,7 +245,7 @@ function countdown(btnID, time, wait, isLock) {
                 countdown(btnID,time,wait,isLock); 
             },1000);
         }
-    }else{
+    } else {
         if(wait == 0) {
             $time_desc.text('记忆时间:');
             wait = time;
@@ -291,7 +291,7 @@ $(function() {
                 showToast('手机号码格式错误~');
             } else {
                 sessionStorage.setItem('CARD_MOBILE', tel);
-                start_game(dumpBase.isEnd);
+                start_game();
             }
         } else {
             showToast('该活动已结束！', 2000);
@@ -307,7 +307,7 @@ $(function() {
         }else if(theID == 'lottery_btn') {
             $(this).hasClass('active') ? lottery() : showToast('正在抽奖中，请稍候...',1500); //抽奖
         }else if(theID == 'again_btn' || theID == 'come_again_btn' || theID == 'come_again_btn2'){
-            start_game(dumpBase.isEnd); //再玩一次
+            start_game(); //再玩一次
         }else if(theID == 'close_btn2' || theID == 'close_btn4') {
             close_popover(); //知道了
             setTimeout(function(){ $popover_.show(); },300);
@@ -321,7 +321,7 @@ $(function() {
                 return;
             }else {
                 if (mobile != null) {
-                    $('.default_mobile').text(replace_mobile(mobile, 3, 4));
+                    $('.default_mobile').text(replaceMobile(mobile, 3, 4));
                 }else{
                     showToast('请输入手机号码~');
                     return;
