@@ -34,29 +34,29 @@ function replaceMobile(mobile, front_len, end_len) {
 }
 
 //显示提示框
-var toast_timer = 0;
+var toastTimer = null;
 function showToast(message, t) {
-    var alert = document.getElementById("toast");
-    if(alert == null){
-        alert =  document.createElement("div");
+    var alert = document.getElementById('toast');
+    if(alert == null) {
+        alert = document.createElement("div");
         alert.id = 'toast';
         alert.className = 'fd';
         alert.innerText = message;
-    }else{
+    } else {
         alert.style.opacity = .9;
     }
     document.body.appendChild(alert);
-    t = (t != undefined) ? t : 1000;
-    toast_timer = setTimeout(function() {
-        hideToast();
+    t = t ? t : 1000;
+    toastTimer = setTimeout(function() {
+    hideToast();
     }, t);
 }
 
-//隐藏提示框
+// 隐藏提示框
 function hideToast() {
-    var alert = document.getElementById("toast");
+    var alert = document.getElementById('toast');
     if(alert != null) {
         document.body.removeChild(alert);
-        clearTimeout(toast_timer);
-    } 
+        clearTimeout(toastTimer);
+    }
 }

@@ -51,7 +51,7 @@ function start_game() {
 }
 
 //倒计时 开始游戏
-function start_game2() {
+function start_playing() {
     showToast('游戏开始，加油！');
     setTimeout(function() {
         isLock = 2;
@@ -237,7 +237,7 @@ function countdown(btnID, time, wait, isLock) {
             $time_desc.text('倒计时间:');
             time = wait;
             $time.text(time);
-            start_game2();
+            start_playing();
         } else {
             time--;
             $time.text(time);
