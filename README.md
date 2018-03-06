@@ -4,6 +4,10 @@
 
 该版本目前只有zepto（未优化）和新的Vue 2版本。
 
+效果演示：
+
+![image](https://github.com/hehaibao/flop-game/blob/master/preview.gif)
+
 在线演示（请用手机模式哦）：
 
 https://hehaibao.github.io/flop-game/version-for-zepto/index.html
