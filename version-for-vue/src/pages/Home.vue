@@ -289,6 +289,13 @@
                   }
               ];
 
+              // 重置JS添加的卡牌classname 待优化
+              if(this.$refs.cards) {
+                  self.cardArrs.forEach(function(res, index) {
+                      self.$refs.cards[index].className = 'card';
+                  });
+              }
+
               // 从缓存取手机号
               self.mobile = sessionStorage.getItem('CARD_MOBILE') || '';
 
@@ -337,7 +344,7 @@
               }, 500);
           },
           clickCard(val, index) {
-              // 点击卡牌
+              // 点击卡牌 待优化
               this.isLock = sessionStorage.getItem('CARD_ISLOCK');
               if(this.isLock == 2) {
                   // 游戏中
@@ -396,7 +403,7 @@
               if(status === 1) {
                   // 中奖了 演示而已
                   const lotteryArr = ['特等奖', '一等奖', '二等奖', '三等奖', '安慰奖'];
-                  let randomV = Math.ceil(Math.random() * lotteryArr.length);
+                  let randomV = Math.floor(Math.random()*(lotteryArr.length+1));
                   this.lotteryName = lotteryArr[randomV]; // 暂存奖品名称
                   this.myLottery.push(this.lotteryName);
                   this.showDot = true; // 只有中奖才会显示未读圆点
@@ -437,6 +444,7 @@
               // 关闭遮罩层
               const lock_status = sessionStorage.getItem('CARD_ISLOCK');
               this.showModalIndex = null;
+
               if(lock_status == null) return;
               if(lock_status != 0) {
                   this.countdown(); // 关闭活动规则 继续开始计时器
