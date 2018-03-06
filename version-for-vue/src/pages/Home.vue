@@ -107,7 +107,7 @@
     <div class="modal m7" v-if="showModalIndex==7">
       <div class="head"></div>
       <div class="contents">
-        <p class="modal_tips tc">恭喜您获得了：<span id="lottery_name">***</span>哦～</p>
+        <p class="modal_tips tc">恭喜您获得了：<span id="lottery_name">{{ lotteryName }}</span>哦～</p>
         <p class="fw oh">
           <a class="modal_btns fl" @click="myLotteryList">查看奖品</a>
           <a class="modal_btns fr" @click="playAgain">再玩一次</a>
@@ -190,6 +190,7 @@
             isLock: 0, // 游戏状态
             isEnd: 2, // 是否活动结束
             myLottery: [], // 我的中奖记录数组
+            lotteryName: '', // 当前中奖的名称
             cardArrs: [], // 卡牌列表
             cardWidth: 80, // 卡牌宽度
             cardHeight: 80, // 卡牌高度
@@ -227,8 +228,13 @@
                   return;
               }
 
-              // 重置所有卡牌至背面
+              // 重置中奖的名称
+              self.lotteryName = '';
+
+              // 重置卡牌选中的数量
               self.cardSelectedNum = 0;
+
+              // 重置所有卡牌至背面
               self.cardFlip = '';
 
               // 加载卡牌列表（伪造数据）
@@ -335,8 +341,6 @@
               this.isLock = sessionStorage.getItem('CARD_ISLOCK');
               if(this.isLock == 2) {
                   // 游戏中
-                  this.cardSelectedArr.push({ key: index, value: val}); // 记录点击的卡牌信息
-
                   var $fcards = this.$refs.cards;
                   var $fcard = $fcards[index];
 
@@ -345,6 +349,10 @@
                       return;
                   }
 
+                  // 记录点击的卡牌信息
+                  this.cardSelectedArr.push({ key: index, value: val });
+
+                  // 给卡牌添加classname
                   $fcards.className = 'card';
                   $fcard.className = 'card card-flipped';
 
@@ -389,7 +397,8 @@
                   // 中奖了 演示而已
                   const lotteryArr = ['特等奖', '一等奖', '二等奖', '三等奖', '安慰奖'];
                   let randomV = Math.ceil(Math.random() * lotteryArr.length);
-                  this.myLottery.push(lotteryArr[randomV]);
+                  this.lotteryName = lotteryArr[randomV]; // 暂存奖品名称
+                  this.myLottery.push(this.lotteryName);
                   this.showDot = true; // 只有中奖才会显示未读圆点
                   this.showModal(7);
               } else {

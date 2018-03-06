@@ -51,7 +51,7 @@ html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {  -webkit-text-size-
 #btns .btn{width:40%;height:30px;line-height:30px;border-radius:7px;display:inline-block;font-size:.9rem;font-weight:700;letter-spacing:1px;}
 .btns_lf{background-color:#ffda48;color:#ff8734;box-shadow: 0 0 3px #ffc838 inset;}
 .btns_rt{background-color:#f46949;color:#fff;box-shadow:0 0 3px #eb473b inset;}
-#dot{width:6px;height:6px;background-color:#fffa45;border-radius:50%;display:block;display:none;position:absolute;top:3px;right:5px;z-index:22;}
+#dot{width:6px;height:6px;background-color:#fffa45;border-radius:50%;display:block;position:absolute;top:3px;right:5px;z-index:22;}
 #time{width:26px;height:26px;line-height:26px;margin:2px 5px 0 0;display:inline-block;font-size:1.2rem;color:#f56042;font-weight:700;letter-spacing:0;}
 #card_box{width:294px;margin:0 auto;padding:3px 0;background-color:#1bafd2;border-radius:2px;}
 #cards{width:266px;height:370px;margin:11px auto auto;position: relative;}
