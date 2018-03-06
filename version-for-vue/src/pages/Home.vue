@@ -174,15 +174,13 @@
       }
   })() ;
 
-  const [ TM1, TM2 ] = [ 10, 20];
+  const [ TM1, TM2 ] = [ 10, 20]; // 记忆时间和倒计时时间
   export default {
 	  	data() {
 	        return {
-            time: TM1, // 记忆时间
-            wait: TM2, // 倒计时时间
+            time: TM1, // 倒计时时间
             timeDesc: '', // 区分是记忆时间还是倒计时
-            timer1: null,
-            timer2: null,
+            timer: null, // 计时器
             showDot: false, // 是否显示圆点通知
             showTip: false, // 区别显示modal5里的提示文案
             mobile: '', // 手机号
@@ -216,7 +214,6 @@
 
               // 时间文案
               self.time = TM1;
-              self.wait = TM2;
               self.timeDesc = '记忆时间:';
 
               // 加载活动规则
@@ -370,9 +367,7 @@
                           if(self.cardSelectedArr[0].value != self.cardSelectedArr[1].value) {
                               // 两张卡牌不一致，重置
                               self.cardSelectedArr.forEach(function(res) {
-                                  return function(n) {
-                                      $fcards[n].className = 'card';
-                                  }(res.key);
+                                  $fcards[res.key].className = 'card';
                               });
                           } else {
                               self.cardSelectedNum += 2; // 记录成功的卡牌数量
@@ -391,7 +386,7 @@
           },
           gameover() {
               // 游戏结束
-              clearTimeout(this.timer2);
+              clearTimeout(this.timer);
               this.showTip = true;
               this.showModal(4);
               this.init();
@@ -436,8 +431,7 @@
           },
           showModal(index) {
               // 显示遮罩层
-              clearTimeout(this.timer1);
-              clearTimeout(this.timer2); // 游戏中点击活动规则 暂停倒计时
+              clearTimeout(this.timer); // 游戏中点击活动规则 暂停倒计时
               this.showModalIndex = index;
           },
           closeModal() {
@@ -453,33 +447,24 @@
           countdown() {
               // 倒计时
               let self = this;
-              if(self.isLock == 1) {
-                  if(self.time == 0) {
-                      self.cardFlip = '';
-                      self.timeDesc = '倒计时间:';
-                      self.time = TM2;
-                      self.startPlaying();
-                  } else {
-                      self.time--;
-                      self.timer1 = setTimeout(function() {
-                          self.countdown();
-                      }, 1000);
-                  }
+              if(self.time == 0) {
+                if(self.isLock == 1) {
+                    self.cardFlip = '';
+                    self.timeDesc = '倒计时间:';
+                    self.time = TM2;
+                    self.startPlaying();
+                } else {
+                    self.timeDesc = '记忆时间:';
+                    self.time = TM1;
+                    self.showTip = false;
+                    self.showModal(5);
+                    self.init();
+                }
               } else {
-                  if(self.wait == 0) {
-                      self.timeDesc = '记忆时间:';
-                      self.wait = TM2;
-                      self.time = TM1;
-                      self.showTip = false;
-                      self.showModal(5);
-                      self.init();
-                  } else {
-                      self.wait--;
-                      self.time = self.wait;
-                      self.timer2 = setTimeout(function() {
-                          self.countdown();
-                      }, 1000);
-                  }
+                  self.time--;
+                  self.timer = setTimeout(function() {
+                      self.countdown();
+                  }, 1000);
               }
           },
           getFormatDate(d) {
